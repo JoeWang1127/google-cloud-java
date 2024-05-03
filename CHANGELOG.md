@@ -1,5 +1,51 @@
 # Changelog
 
+## [1.37.0](https://github.com/googleapis/google-cloud-java/compare/v1.36.0...v1.37.0) (2024-05-03)
+
+
+### Features
+
+* [aiplatform] A new field `deploy_task_name` is added to message `.google.cloud.aiplatform.v1.PublisherModel` ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A new field `private_service_connect_config` is added to message `.google.cloud.aiplatform.v1.Endpoint` ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A new field `search_entry_point` is added to message `.google.cloud.aiplatform.v1.GroundingMetadata` ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A new message `SearchEntryPoint` is added ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A new value `INVALID_TOKEN_VALUE` is added to enum `RecordErrorType` ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A new value `TPU_V5_LITEPOD` is added to enum `AcceleratorType` ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] add NotebookExecutionJob resource and APIs to public v1beta1 client library ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [compute] Update Compute Engine API to revision 20240407 ([#890](https://github.com/googleapis/google-cloud-java/issues/890)) ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [compute] Update Compute Engine API to revision 20240421 ([#899](https://github.com/googleapis/google-cloud-java/issues/899)) ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [dialogflow-cx] added Conversation History API ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [dialogflow-cx] added Language Info to webhook Request ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* **parallelstore/v1beta:** add ImportData and ExportData RPCs ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+
+
+### Bug Fixes
+
+* [monitoring] Defined class prefix of GMON for Objective C ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* **deps:** update dependency com.google.cloud:google-cloud-pubsub-bom to v1.129.1 ([#10754](https://github.com/googleapis/google-cloud-java/issues/10754)) ([ab3ab49](https://github.com/googleapis/google-cloud-java/commit/ab3ab4999f54fa20e21206d4876900c9fec2d6e6))
+* **deps:** update dependency com.google.cloud:google-cloud-pubsub-bom to v1.129.2 ([#10765](https://github.com/googleapis/google-cloud-java/issues/10765)) ([b82bca2](https://github.com/googleapis/google-cloud-java/commit/b82bca2486178a90050678c3e5b0a11155e03b1d))
+
+
+### Dependencies
+
+* update library generation image tag ([#10758](https://github.com/googleapis/google-cloud-java/issues/10758)) ([4b2f4c6](https://github.com/googleapis/google-cloud-java/commit/4b2f4c63663b1c7ed6c422fcfb94b381e36d7dc0))
+
+
+### Documentation
+
+* [aiplatform] A comment for field `base_model` in message `.google.cloud.aiplatform.v1.TuningJob` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A comment for field `epoch_count` in message `.google.cloud.aiplatform.v1.SupervisedHyperParameters` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A comment for field `learning_rate_multiplier` in message `.google.cloud.aiplatform.v1.SupervisedHyperParameters` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A comment for field `name` in message `.google.cloud.aiplatform.v1.NotebookRuntimeTemplate` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A comment for field `parent` in message `.google.cloud.aiplatform.v1.CreateFeatureGroupRequest` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A comment for field `training_dataset_uri` in message `.google.cloud.aiplatform.v1.SupervisedTuningSpec` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A comment for field `tuned_model_display_name` in message `.google.cloud.aiplatform.v1.TuningJob` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [aiplatform] A comment for field `validation_dataset_uri` in message `.google.cloud.aiplatform.v1.SupervisedTuningSpec` is changed ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [batch] Update description on allowed_locations in LocationPolicy field ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [dialogflow-cx] improve doc for SecuritySetting.retention_window_days ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [maps-places] update comment of Places API ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* [parallelstore] fix typo in Instance.reserved_ip_range field doc ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+
 ## [1.36.0](https://github.com/googleapis/google-cloud-java/compare/v1.35.0...v1.36.0) (2024-04-25)
 
 
