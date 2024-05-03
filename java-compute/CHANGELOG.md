@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.53.0 (2024-05-03)
+
+### Features
+
+* Update Compute Engine API to revision 20240407 ([#890](https://github.com/googleapis/google-cloud-java/issues/890)) ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+* Update Compute Engine API to revision 20240421 ([#899](https://github.com/googleapis/google-cloud-java/issues/899)) ([8179bb9](https://github.com/googleapis/google-cloud-java/commit/8179bb98325eee54b44f44622e0157429539ec50))
+
+
+
 ## 1.52.0 (2024-04-25)
 
 * No change
