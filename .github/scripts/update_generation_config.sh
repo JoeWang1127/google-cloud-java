@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
 # This script should be run at the root of the repository.
-# This script is used to update parameters in generation
-# configuration at the time of running and create a pull request.
+# This script is used to update googleapis_commitish, gapic_generator_version,
+# and libraries_bom_version in generation configuration at the time of running
+# and create a pull request.
 
 # The following commands need to be installed before running the script:
 # 1. git
@@ -10,20 +11,15 @@ set -e
 # 3. jq
 
 # Utility functions
-function get_major_version() {
-    local key_word=$1
-    major=$(grep "${key_word}" "${generation_config}" | cut -d ':' -f 2 | xargs | cut -d '.' -f 1)
-    echo "${major}"
-}
-
-function get_latest_release_version() {
+# Get the latest released version of a Maven artifact.
+function get_latest_released_version() {
     local group_id=$1
     local artifact_id=$2
-    local major_version=$3
-    latest=$(curl -s "https://search.maven.org/solrsearch/select?q=g:${group_id}+AND+a:${artifact_id}&core=gav&rows=500&wt=json" | jq -r '.response.docs[] | select(.v | test("^[0-9]+(\\.[0-9]+)*$")) | .v' | grep ^"${major_version}". | sort -V | tail -n 1)
+    latest=$(curl -s "https://search.maven.org/solrsearch/select?q=g:${group_id}+AND+a:${artifact_id}&core=gav&rows=500&wt=json" | jq -r '.response.docs[] | select(.v | test("^[0-9]+(\\.[0-9]+)*$")) | .v' | sort -V | tail -n 1)
     echo "${latest}"
 }
 
+# Update a key to a new value in the generation config.
 function update_config() {
     local key_word=$1
     local new_value=$2
@@ -76,7 +72,7 @@ if [ -z "${generation_config}" ]; then
 fi
 
 current_branch="generate-libraries-${base_branch}"
-title="chore: update generation configuration at $(date)"
+title="chore: Update generation configuration at $(date)"
 
 # try to find a open pull request associated with the branch
 pr_num=$(gh pr list -s open -H "${current_branch}" -q . --json number | jq ".[] | .number")
@@ -98,14 +94,12 @@ popd
 rm -rf tmp-googleapis
 update_config "googleapis_commitish" "${latest_commit}" "${generation_config}"
 
-# update gapic-generator-java version to the latest within a given major version
-major_version=$(get_major_version "gapic_generator_version")
-latest_version=$(get_latest_release_version "com.google.api" "gapic-generator-java" "${major_version}")
+# update gapic-generator-java version to the latest
+latest_version=$(get_latest_released_version "com.google.api" "gapic-generator-java")
 update_config "gapic_generator_version" "${latest_version}" "${generation_config}"
 
-# update libraries-bom version to the latest within a given major version
-major_version=$(get_major_version "libraries_bom_version")
-latest_version=$(get_latest_release_version "com.google.cloud" "libraries-bom" "${major_version}")
+# update libraries-bom version to the latest
+latest_version=$(get_latest_released_version "com.google.cloud" "libraries-bom")
 update_config "libraries_bom_version" "${latest_version}" "${generation_config}"
 
 git add "${generation_config}"
@@ -123,4 +117,5 @@ if [ -z "${pr_num}" ]; then
   gh pr create --title "${title}" --head "${current_branch}" --body "${title}" --base "${base_branch}"
 else
   git push
+  gh pr edit "${pr_num}" --title "${title}" --body "${title}"
 fi
