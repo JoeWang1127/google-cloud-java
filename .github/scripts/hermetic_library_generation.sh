@@ -21,7 +21,6 @@ set -e
 # The parameters of this script is:
 # 1. target_branch, the branch into which the pull request is merged.
 # 2. current_branch, the branch with which the pull request is associated.
-# 3. image_tag, the tag of gcr.io/cloud-devrel-public-resources/java-library-generation.
 # 3. [optional] generation_config, the path to the generation configuration,
 # the default value is generation_config.yaml in the repository root.
 while [[ $# -gt 0 ]]; do
@@ -33,10 +32,6 @@ case "${key}" in
     ;;
   --current_branch)
     current_branch="$2"
-    shift
-    ;;
-  --image_tag)
-    image_tag="$2"
     shift
     ;;
   --generation_config)
@@ -58,11 +53,6 @@ fi
 
 if [ -z "${current_branch}" ]; then
   echo "missing required argument --current_branch"
-  exit 1
-fi
-
-if [ -z "${image_tag}" ]; then
-  echo "missing required argument --image_tag"
   exit 1
 fi
 
@@ -88,12 +78,14 @@ fi
 git show "${target_branch}":"${generation_config}" > "${baseline_generation_config}"
 config_diff=$(diff "${generation_config}" "${baseline_generation_config}" || true)
 
+# parse image tag from the generation configuration.
+image_tag=$(grep "gapic_generator_version" "${generation_config}" | cut -d ':' -f 2 | xargs)
+
 # run hermetic code generation docker image.
 docker run \
   --rm \
   -u "$(id -u):$(id -g)" \
   -v "$(pwd):${workspace_name}" \
-  -v "$HOME"/.m2:/home/.m2 \
   gcr.io/cloud-devrel-public-resources/java-library-generation:"${image_tag}" \
   --baseline-generation-config-path="${workspace_name}/${baseline_generation_config}" \
   --current-generation-config-path="${workspace_name}/${generation_config}"
