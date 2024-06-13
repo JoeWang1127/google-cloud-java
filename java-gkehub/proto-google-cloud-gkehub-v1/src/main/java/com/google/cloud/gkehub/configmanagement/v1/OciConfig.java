@@ -23,50 +23,47 @@ package com.google.cloud.gkehub.configmanagement.v1;
  *
  *
  * <pre>
- * Git repo configuration for a single cluster.
+ * OCI repo configuration for a single cluster
  * </pre>
  *
- * Protobuf type {@code google.cloud.gkehub.configmanagement.v1.GitConfig}
+ * Protobuf type {@code google.cloud.gkehub.configmanagement.v1.OciConfig}
  */
-public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
+public final class OciConfig extends com.google.protobuf.GeneratedMessageV3
     implements
-    // @@protoc_insertion_point(message_implements:google.cloud.gkehub.configmanagement.v1.GitConfig)
-    GitConfigOrBuilder {
+    // @@protoc_insertion_point(message_implements:google.cloud.gkehub.configmanagement.v1.OciConfig)
+    OciConfigOrBuilder {
   private static final long serialVersionUID = 0L;
-  // Use GitConfig.newBuilder() to construct.
-  private GitConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use OciConfig.newBuilder() to construct.
+  private OciConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
 
-  private GitConfig() {
+  private OciConfig() {
     syncRepo_ = "";
-    syncBranch_ = "";
     policyDir_ = "";
-    syncRev_ = "";
     secretType_ = "";
-    httpsProxy_ = "";
     gcpServiceAccountEmail_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(UnusedPrivateParameter unused) {
-    return new GitConfig();
+    return new OciConfig();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
     return com.google.cloud.gkehub.configmanagement.v1.ConfigManagementProto
-        .internal_static_google_cloud_gkehub_configmanagement_v1_GitConfig_descriptor;
+        .internal_static_google_cloud_gkehub_configmanagement_v1_OciConfig_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return com.google.cloud.gkehub.configmanagement.v1.ConfigManagementProto
-        .internal_static_google_cloud_gkehub_configmanagement_v1_GitConfig_fieldAccessorTable
+        .internal_static_google_cloud_gkehub_configmanagement_v1_OciConfig_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.google.cloud.gkehub.configmanagement.v1.GitConfig.class,
-            com.google.cloud.gkehub.configmanagement.v1.GitConfig.Builder.class);
+            com.google.cloud.gkehub.configmanagement.v1.OciConfig.class,
+            com.google.cloud.gkehub.configmanagement.v1.OciConfig.Builder.class);
   }
 
   public static final int SYNC_REPO_FIELD_NUMBER = 1;
@@ -77,7 +74,8 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * The URL of the Git repository to use as the source of truth.
+   * The OCI image repository URL for the package to sync from.
+   * e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
    * </pre>
    *
    * <code>string sync_repo = 1;</code>
@@ -100,7 +98,8 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * The URL of the Git repository to use as the source of truth.
+   * The OCI image repository URL for the package to sync from.
+   * e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
    * </pre>
    *
    * <code>string sync_repo = 1;</code>
@@ -120,58 +119,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     }
   }
 
-  public static final int SYNC_BRANCH_FIELD_NUMBER = 2;
-
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object syncBranch_ = "";
-  /**
-   *
-   *
-   * <pre>
-   * The branch of the repository to sync from. Default: master.
-   * </pre>
-   *
-   * <code>string sync_branch = 2;</code>
-   *
-   * @return The syncBranch.
-   */
-  @java.lang.Override
-  public java.lang.String getSyncBranch() {
-    java.lang.Object ref = syncBranch_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      syncBranch_ = s;
-      return s;
-    }
-  }
-  /**
-   *
-   *
-   * <pre>
-   * The branch of the repository to sync from. Default: master.
-   * </pre>
-   *
-   * <code>string sync_branch = 2;</code>
-   *
-   * @return The bytes for syncBranch.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString getSyncBranchBytes() {
-    java.lang.Object ref = syncBranch_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b =
-          com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
-      syncBranch_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int POLICY_DIR_FIELD_NUMBER = 3;
+  public static final int POLICY_DIR_FIELD_NUMBER = 2;
 
   @SuppressWarnings("serial")
   private volatile java.lang.Object policyDir_ = "";
@@ -179,11 +127,11 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * The path within the Git repository that represents the top level of the
-   * repo to sync. Default: the root directory of the repository.
+   * The absolute path of the directory that contains
+   * the local resources.  Default: the root directory of the image.
    * </pre>
    *
-   * <code>string policy_dir = 3;</code>
+   * <code>string policy_dir = 2;</code>
    *
    * @return The policyDir.
    */
@@ -203,11 +151,11 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * The path within the Git repository that represents the top level of the
-   * repo to sync. Default: the root directory of the repository.
+   * The absolute path of the directory that contains
+   * the local resources.  Default: the root directory of the image.
    * </pre>
    *
-   * <code>string policy_dir = 3;</code>
+   * <code>string policy_dir = 2;</code>
    *
    * @return The bytes for policyDir.
    */
@@ -224,7 +172,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     }
   }
 
-  public static final int SYNC_WAIT_SECS_FIELD_NUMBER = 4;
+  public static final int SYNC_WAIT_SECS_FIELD_NUMBER = 3;
   private long syncWaitSecs_ = 0L;
   /**
    *
@@ -233,7 +181,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    * Period in seconds between consecutive syncs. Default: 15.
    * </pre>
    *
-   * <code>int64 sync_wait_secs = 4;</code>
+   * <code>int64 sync_wait_secs = 3;</code>
    *
    * @return The syncWaitSecs.
    */
@@ -242,58 +190,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     return syncWaitSecs_;
   }
 
-  public static final int SYNC_REV_FIELD_NUMBER = 5;
-
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object syncRev_ = "";
-  /**
-   *
-   *
-   * <pre>
-   * Git revision (tag or hash) to check out. Default HEAD.
-   * </pre>
-   *
-   * <code>string sync_rev = 5;</code>
-   *
-   * @return The syncRev.
-   */
-  @java.lang.Override
-  public java.lang.String getSyncRev() {
-    java.lang.Object ref = syncRev_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      syncRev_ = s;
-      return s;
-    }
-  }
-  /**
-   *
-   *
-   * <pre>
-   * Git revision (tag or hash) to check out. Default HEAD.
-   * </pre>
-   *
-   * <code>string sync_rev = 5;</code>
-   *
-   * @return The bytes for syncRev.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString getSyncRevBytes() {
-    java.lang.Object ref = syncRev_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b =
-          com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
-      syncRev_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int SECRET_TYPE_FIELD_NUMBER = 6;
+  public static final int SECRET_TYPE_FIELD_NUMBER = 4;
 
   @SuppressWarnings("serial")
   private volatile java.lang.Object secretType_ = "";
@@ -301,12 +198,10 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Type of secret configured for access to the Git repo. Must be one of ssh,
-   * cookiefile, gcenode, token, gcpserviceaccount or none. The
-   * validation of this is case-sensitive. Required.
+   * Type of secret configured for access to the Git repo.
    * </pre>
    *
-   * <code>string secret_type = 6;</code>
+   * <code>string secret_type = 4;</code>
    *
    * @return The secretType.
    */
@@ -326,12 +221,10 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Type of secret configured for access to the Git repo. Must be one of ssh,
-   * cookiefile, gcenode, token, gcpserviceaccount or none. The
-   * validation of this is case-sensitive. Required.
+   * Type of secret configured for access to the Git repo.
    * </pre>
    *
-   * <code>string secret_type = 6;</code>
+   * <code>string secret_type = 4;</code>
    *
    * @return The bytes for secretType.
    */
@@ -348,58 +241,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     }
   }
 
-  public static final int HTTPS_PROXY_FIELD_NUMBER = 7;
-
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object httpsProxy_ = "";
-  /**
-   *
-   *
-   * <pre>
-   * URL for the HTTPS proxy to be used when communicating with the Git repo.
-   * </pre>
-   *
-   * <code>string https_proxy = 7;</code>
-   *
-   * @return The httpsProxy.
-   */
-  @java.lang.Override
-  public java.lang.String getHttpsProxy() {
-    java.lang.Object ref = httpsProxy_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      httpsProxy_ = s;
-      return s;
-    }
-  }
-  /**
-   *
-   *
-   * <pre>
-   * URL for the HTTPS proxy to be used when communicating with the Git repo.
-   * </pre>
-   *
-   * <code>string https_proxy = 7;</code>
-   *
-   * @return The bytes for httpsProxy.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString getHttpsProxyBytes() {
-    java.lang.Object ref = httpsProxy_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b =
-          com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
-      httpsProxy_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int GCP_SERVICE_ACCOUNT_EMAIL_FIELD_NUMBER = 8;
+  public static final int GCP_SERVICE_ACCOUNT_EMAIL_FIELD_NUMBER = 5;
 
   @SuppressWarnings("serial")
   private volatile java.lang.Object gcpServiceAccountEmail_ = "";
@@ -411,7 +253,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    * gcpServiceAccount.
    * </pre>
    *
-   * <code>string gcp_service_account_email = 8;</code>
+   * <code>string gcp_service_account_email = 5;</code>
    *
    * @return The gcpServiceAccountEmail.
    */
@@ -435,7 +277,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    * gcpServiceAccount.
    * </pre>
    *
-   * <code>string gcp_service_account_email = 8;</code>
+   * <code>string gcp_service_account_email = 5;</code>
    *
    * @return The bytes for gcpServiceAccountEmail.
    */
@@ -469,26 +311,17 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(syncRepo_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, syncRepo_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(syncBranch_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, syncBranch_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(policyDir_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, policyDir_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, policyDir_);
     }
     if (syncWaitSecs_ != 0L) {
-      output.writeInt64(4, syncWaitSecs_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(syncRev_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, syncRev_);
+      output.writeInt64(3, syncWaitSecs_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(secretType_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, secretType_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(httpsProxy_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, httpsProxy_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, secretType_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gcpServiceAccountEmail_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, gcpServiceAccountEmail_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, gcpServiceAccountEmail_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -502,26 +335,17 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(syncRepo_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, syncRepo_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(syncBranch_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, syncBranch_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(policyDir_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, policyDir_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, policyDir_);
     }
     if (syncWaitSecs_ != 0L) {
-      size += com.google.protobuf.CodedOutputStream.computeInt64Size(4, syncWaitSecs_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(syncRev_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, syncRev_);
+      size += com.google.protobuf.CodedOutputStream.computeInt64Size(3, syncWaitSecs_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(secretType_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, secretType_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(httpsProxy_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, httpsProxy_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, secretType_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gcpServiceAccountEmail_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, gcpServiceAccountEmail_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, gcpServiceAccountEmail_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -533,19 +357,16 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     if (obj == this) {
       return true;
     }
-    if (!(obj instanceof com.google.cloud.gkehub.configmanagement.v1.GitConfig)) {
+    if (!(obj instanceof com.google.cloud.gkehub.configmanagement.v1.OciConfig)) {
       return super.equals(obj);
     }
-    com.google.cloud.gkehub.configmanagement.v1.GitConfig other =
-        (com.google.cloud.gkehub.configmanagement.v1.GitConfig) obj;
+    com.google.cloud.gkehub.configmanagement.v1.OciConfig other =
+        (com.google.cloud.gkehub.configmanagement.v1.OciConfig) obj;
 
     if (!getSyncRepo().equals(other.getSyncRepo())) return false;
-    if (!getSyncBranch().equals(other.getSyncBranch())) return false;
     if (!getPolicyDir().equals(other.getPolicyDir())) return false;
     if (getSyncWaitSecs() != other.getSyncWaitSecs()) return false;
-    if (!getSyncRev().equals(other.getSyncRev())) return false;
     if (!getSecretType().equals(other.getSecretType())) return false;
-    if (!getHttpsProxy().equals(other.getHttpsProxy())) return false;
     if (!getGcpServiceAccountEmail().equals(other.getGcpServiceAccountEmail())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
@@ -560,18 +381,12 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + SYNC_REPO_FIELD_NUMBER;
     hash = (53 * hash) + getSyncRepo().hashCode();
-    hash = (37 * hash) + SYNC_BRANCH_FIELD_NUMBER;
-    hash = (53 * hash) + getSyncBranch().hashCode();
     hash = (37 * hash) + POLICY_DIR_FIELD_NUMBER;
     hash = (53 * hash) + getPolicyDir().hashCode();
     hash = (37 * hash) + SYNC_WAIT_SECS_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(getSyncWaitSecs());
-    hash = (37 * hash) + SYNC_REV_FIELD_NUMBER;
-    hash = (53 * hash) + getSyncRev().hashCode();
     hash = (37 * hash) + SECRET_TYPE_FIELD_NUMBER;
     hash = (53 * hash) + getSecretType().hashCode();
-    hash = (37 * hash) + HTTPS_PROXY_FIELD_NUMBER;
-    hash = (53 * hash) + getHttpsProxy().hashCode();
     hash = (37 * hash) + GCP_SERVICE_ACCOUNT_EMAIL_FIELD_NUMBER;
     hash = (53 * hash) + getGcpServiceAccountEmail().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -579,71 +394,71 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     return hash;
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       java.nio.ByteBuffer data) throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       java.nio.ByteBuffer data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(byte[] data)
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       byte[] data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       java.io.InputStream input) throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3.parseWithIOException(
         PARSER, input, extensionRegistry);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseDelimitedFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseDelimitedFrom(
       java.io.InputStream input) throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseDelimitedFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseDelimitedFrom(
       java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(
         PARSER, input, extensionRegistry);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       com.google.protobuf.CodedInputStream input) throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig parseFrom(
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -661,7 +476,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
   }
 
   public static Builder newBuilder(
-      com.google.cloud.gkehub.configmanagement.v1.GitConfig prototype) {
+      com.google.cloud.gkehub.configmanagement.v1.OciConfig prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
 
@@ -679,31 +494,31 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
    *
    *
    * <pre>
-   * Git repo configuration for a single cluster.
+   * OCI repo configuration for a single cluster
    * </pre>
    *
-   * Protobuf type {@code google.cloud.gkehub.configmanagement.v1.GitConfig}
+   * Protobuf type {@code google.cloud.gkehub.configmanagement.v1.OciConfig}
    */
   public static final class Builder extends com.google.protobuf.GeneratedMessageV3.Builder<Builder>
       implements
-      // @@protoc_insertion_point(builder_implements:google.cloud.gkehub.configmanagement.v1.GitConfig)
-      com.google.cloud.gkehub.configmanagement.v1.GitConfigOrBuilder {
+      // @@protoc_insertion_point(builder_implements:google.cloud.gkehub.configmanagement.v1.OciConfig)
+      com.google.cloud.gkehub.configmanagement.v1.OciConfigOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
       return com.google.cloud.gkehub.configmanagement.v1.ConfigManagementProto
-          .internal_static_google_cloud_gkehub_configmanagement_v1_GitConfig_descriptor;
+          .internal_static_google_cloud_gkehub_configmanagement_v1_OciConfig_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.google.cloud.gkehub.configmanagement.v1.ConfigManagementProto
-          .internal_static_google_cloud_gkehub_configmanagement_v1_GitConfig_fieldAccessorTable
+          .internal_static_google_cloud_gkehub_configmanagement_v1_OciConfig_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.google.cloud.gkehub.configmanagement.v1.GitConfig.class,
-              com.google.cloud.gkehub.configmanagement.v1.GitConfig.Builder.class);
+              com.google.cloud.gkehub.configmanagement.v1.OciConfig.class,
+              com.google.cloud.gkehub.configmanagement.v1.OciConfig.Builder.class);
     }
 
-    // Construct using com.google.cloud.gkehub.configmanagement.v1.GitConfig.newBuilder()
+    // Construct using com.google.cloud.gkehub.configmanagement.v1.OciConfig.newBuilder()
     private Builder() {}
 
     private Builder(com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
@@ -715,12 +530,9 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
       super.clear();
       bitField0_ = 0;
       syncRepo_ = "";
-      syncBranch_ = "";
       policyDir_ = "";
       syncWaitSecs_ = 0L;
-      syncRev_ = "";
       secretType_ = "";
-      httpsProxy_ = "";
       gcpServiceAccountEmail_ = "";
       return this;
     }
@@ -728,17 +540,17 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
       return com.google.cloud.gkehub.configmanagement.v1.ConfigManagementProto
-          .internal_static_google_cloud_gkehub_configmanagement_v1_GitConfig_descriptor;
+          .internal_static_google_cloud_gkehub_configmanagement_v1_OciConfig_descriptor;
     }
 
     @java.lang.Override
-    public com.google.cloud.gkehub.configmanagement.v1.GitConfig getDefaultInstanceForType() {
-      return com.google.cloud.gkehub.configmanagement.v1.GitConfig.getDefaultInstance();
+    public com.google.cloud.gkehub.configmanagement.v1.OciConfig getDefaultInstanceForType() {
+      return com.google.cloud.gkehub.configmanagement.v1.OciConfig.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.google.cloud.gkehub.configmanagement.v1.GitConfig build() {
-      com.google.cloud.gkehub.configmanagement.v1.GitConfig result = buildPartial();
+    public com.google.cloud.gkehub.configmanagement.v1.OciConfig build() {
+      com.google.cloud.gkehub.configmanagement.v1.OciConfig result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -746,9 +558,9 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     }
 
     @java.lang.Override
-    public com.google.cloud.gkehub.configmanagement.v1.GitConfig buildPartial() {
-      com.google.cloud.gkehub.configmanagement.v1.GitConfig result =
-          new com.google.cloud.gkehub.configmanagement.v1.GitConfig(this);
+    public com.google.cloud.gkehub.configmanagement.v1.OciConfig buildPartial() {
+      com.google.cloud.gkehub.configmanagement.v1.OciConfig result =
+          new com.google.cloud.gkehub.configmanagement.v1.OciConfig(this);
       if (bitField0_ != 0) {
         buildPartial0(result);
       }
@@ -756,30 +568,21 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
       return result;
     }
 
-    private void buildPartial0(com.google.cloud.gkehub.configmanagement.v1.GitConfig result) {
+    private void buildPartial0(com.google.cloud.gkehub.configmanagement.v1.OciConfig result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.syncRepo_ = syncRepo_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.syncBranch_ = syncBranch_;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.policyDir_ = policyDir_;
       }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
+      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.syncWaitSecs_ = syncWaitSecs_;
       }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.syncRev_ = syncRev_;
-      }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
+      if (((from_bitField0_ & 0x00000008) != 0)) {
         result.secretType_ = secretType_;
       }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
-        result.httpsProxy_ = httpsProxy_;
-      }
-      if (((from_bitField0_ & 0x00000080) != 0)) {
+      if (((from_bitField0_ & 0x00000010) != 0)) {
         result.gcpServiceAccountEmail_ = gcpServiceAccountEmail_;
       }
     }
@@ -819,53 +622,38 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.google.cloud.gkehub.configmanagement.v1.GitConfig) {
-        return mergeFrom((com.google.cloud.gkehub.configmanagement.v1.GitConfig) other);
+      if (other instanceof com.google.cloud.gkehub.configmanagement.v1.OciConfig) {
+        return mergeFrom((com.google.cloud.gkehub.configmanagement.v1.OciConfig) other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.google.cloud.gkehub.configmanagement.v1.GitConfig other) {
-      if (other == com.google.cloud.gkehub.configmanagement.v1.GitConfig.getDefaultInstance())
+    public Builder mergeFrom(com.google.cloud.gkehub.configmanagement.v1.OciConfig other) {
+      if (other == com.google.cloud.gkehub.configmanagement.v1.OciConfig.getDefaultInstance())
         return this;
       if (!other.getSyncRepo().isEmpty()) {
         syncRepo_ = other.syncRepo_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getSyncBranch().isEmpty()) {
-        syncBranch_ = other.syncBranch_;
-        bitField0_ |= 0x00000002;
-        onChanged();
-      }
       if (!other.getPolicyDir().isEmpty()) {
         policyDir_ = other.policyDir_;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         onChanged();
       }
       if (other.getSyncWaitSecs() != 0L) {
         setSyncWaitSecs(other.getSyncWaitSecs());
       }
-      if (!other.getSyncRev().isEmpty()) {
-        syncRev_ = other.syncRev_;
-        bitField0_ |= 0x00000010;
-        onChanged();
-      }
       if (!other.getSecretType().isEmpty()) {
         secretType_ = other.secretType_;
-        bitField0_ |= 0x00000020;
-        onChanged();
-      }
-      if (!other.getHttpsProxy().isEmpty()) {
-        httpsProxy_ = other.httpsProxy_;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
       if (!other.getGcpServiceAccountEmail().isEmpty()) {
         gcpServiceAccountEmail_ = other.gcpServiceAccountEmail_;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -902,46 +690,28 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
               } // case 10
             case 18:
               {
-                syncBranch_ = input.readStringRequireUtf8();
+                policyDir_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
-            case 26:
-              {
-                policyDir_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000004;
-                break;
-              } // case 26
-            case 32:
+            case 24:
               {
                 syncWaitSecs_ = input.readInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+            case 34:
+              {
+                secretType_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000008;
                 break;
-              } // case 32
+              } // case 34
             case 42:
               {
-                syncRev_ = input.readStringRequireUtf8();
+                gcpServiceAccountEmail_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000010;
                 break;
               } // case 42
-            case 50:
-              {
-                secretType_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000020;
-                break;
-              } // case 50
-            case 58:
-              {
-                httpsProxy_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000040;
-                break;
-              } // case 58
-            case 66:
-              {
-                gcpServiceAccountEmail_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000080;
-                break;
-              } // case 66
             default:
               {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
@@ -966,7 +736,8 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The URL of the Git repository to use as the source of truth.
+     * The OCI image repository URL for the package to sync from.
+     * e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
      * </pre>
      *
      * <code>string sync_repo = 1;</code>
@@ -988,7 +759,8 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The URL of the Git repository to use as the source of truth.
+     * The OCI image repository URL for the package to sync from.
+     * e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
      * </pre>
      *
      * <code>string sync_repo = 1;</code>
@@ -1010,7 +782,8 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The URL of the Git repository to use as the source of truth.
+     * The OCI image repository URL for the package to sync from.
+     * e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
      * </pre>
      *
      * <code>string sync_repo = 1;</code>
@@ -1031,7 +804,8 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The URL of the Git repository to use as the source of truth.
+     * The OCI image repository URL for the package to sync from.
+     * e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
      * </pre>
      *
      * <code>string sync_repo = 1;</code>
@@ -1048,7 +822,8 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The URL of the Git repository to use as the source of truth.
+     * The OCI image repository URL for the package to sync from.
+     * e.g. `LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY_NAME/PACKAGE_NAME`.
      * </pre>
      *
      * <code>string sync_repo = 1;</code>
@@ -1067,122 +842,16 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
       return this;
     }
 
-    private java.lang.Object syncBranch_ = "";
-    /**
-     *
-     *
-     * <pre>
-     * The branch of the repository to sync from. Default: master.
-     * </pre>
-     *
-     * <code>string sync_branch = 2;</code>
-     *
-     * @return The syncBranch.
-     */
-    public java.lang.String getSyncBranch() {
-      java.lang.Object ref = syncBranch_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        syncBranch_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * The branch of the repository to sync from. Default: master.
-     * </pre>
-     *
-     * <code>string sync_branch = 2;</code>
-     *
-     * @return The bytes for syncBranch.
-     */
-    public com.google.protobuf.ByteString getSyncBranchBytes() {
-      java.lang.Object ref = syncBranch_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b =
-            com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
-        syncBranch_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * The branch of the repository to sync from. Default: master.
-     * </pre>
-     *
-     * <code>string sync_branch = 2;</code>
-     *
-     * @param value The syncBranch to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSyncBranch(java.lang.String value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      syncBranch_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * The branch of the repository to sync from. Default: master.
-     * </pre>
-     *
-     * <code>string sync_branch = 2;</code>
-     *
-     * @return This builder for chaining.
-     */
-    public Builder clearSyncBranch() {
-      syncBranch_ = getDefaultInstance().getSyncBranch();
-      bitField0_ = (bitField0_ & ~0x00000002);
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * The branch of the repository to sync from. Default: master.
-     * </pre>
-     *
-     * <code>string sync_branch = 2;</code>
-     *
-     * @param value The bytes for syncBranch to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSyncBranchBytes(com.google.protobuf.ByteString value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      checkByteStringIsUtf8(value);
-      syncBranch_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object policyDir_ = "";
     /**
      *
      *
      * <pre>
-     * The path within the Git repository that represents the top level of the
-     * repo to sync. Default: the root directory of the repository.
+     * The absolute path of the directory that contains
+     * the local resources.  Default: the root directory of the image.
      * </pre>
      *
-     * <code>string policy_dir = 3;</code>
+     * <code>string policy_dir = 2;</code>
      *
      * @return The policyDir.
      */
@@ -1201,11 +870,11 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The path within the Git repository that represents the top level of the
-     * repo to sync. Default: the root directory of the repository.
+     * The absolute path of the directory that contains
+     * the local resources.  Default: the root directory of the image.
      * </pre>
      *
-     * <code>string policy_dir = 3;</code>
+     * <code>string policy_dir = 2;</code>
      *
      * @return The bytes for policyDir.
      */
@@ -1224,11 +893,11 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The path within the Git repository that represents the top level of the
-     * repo to sync. Default: the root directory of the repository.
+     * The absolute path of the directory that contains
+     * the local resources.  Default: the root directory of the image.
      * </pre>
      *
-     * <code>string policy_dir = 3;</code>
+     * <code>string policy_dir = 2;</code>
      *
      * @param value The policyDir to set.
      * @return This builder for chaining.
@@ -1238,7 +907,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
         throw new NullPointerException();
       }
       policyDir_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -1246,17 +915,17 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The path within the Git repository that represents the top level of the
-     * repo to sync. Default: the root directory of the repository.
+     * The absolute path of the directory that contains
+     * the local resources.  Default: the root directory of the image.
      * </pre>
      *
-     * <code>string policy_dir = 3;</code>
+     * <code>string policy_dir = 2;</code>
      *
      * @return This builder for chaining.
      */
     public Builder clearPolicyDir() {
       policyDir_ = getDefaultInstance().getPolicyDir();
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
@@ -1264,11 +933,11 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * The path within the Git repository that represents the top level of the
-     * repo to sync. Default: the root directory of the repository.
+     * The absolute path of the directory that contains
+     * the local resources.  Default: the root directory of the image.
      * </pre>
      *
-     * <code>string policy_dir = 3;</code>
+     * <code>string policy_dir = 2;</code>
      *
      * @param value The bytes for policyDir to set.
      * @return This builder for chaining.
@@ -1279,7 +948,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
       }
       checkByteStringIsUtf8(value);
       policyDir_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -1292,7 +961,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * Period in seconds between consecutive syncs. Default: 15.
      * </pre>
      *
-     * <code>int64 sync_wait_secs = 4;</code>
+     * <code>int64 sync_wait_secs = 3;</code>
      *
      * @return The syncWaitSecs.
      */
@@ -1307,7 +976,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * Period in seconds between consecutive syncs. Default: 15.
      * </pre>
      *
-     * <code>int64 sync_wait_secs = 4;</code>
+     * <code>int64 sync_wait_secs = 3;</code>
      *
      * @param value The syncWaitSecs to set.
      * @return This builder for chaining.
@@ -1315,7 +984,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
     public Builder setSyncWaitSecs(long value) {
 
       syncWaitSecs_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
@@ -1326,119 +995,13 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * Period in seconds between consecutive syncs. Default: 15.
      * </pre>
      *
-     * <code>int64 sync_wait_secs = 4;</code>
+     * <code>int64 sync_wait_secs = 3;</code>
      *
      * @return This builder for chaining.
      */
     public Builder clearSyncWaitSecs() {
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000004);
       syncWaitSecs_ = 0L;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object syncRev_ = "";
-    /**
-     *
-     *
-     * <pre>
-     * Git revision (tag or hash) to check out. Default HEAD.
-     * </pre>
-     *
-     * <code>string sync_rev = 5;</code>
-     *
-     * @return The syncRev.
-     */
-    public java.lang.String getSyncRev() {
-      java.lang.Object ref = syncRev_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        syncRev_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Git revision (tag or hash) to check out. Default HEAD.
-     * </pre>
-     *
-     * <code>string sync_rev = 5;</code>
-     *
-     * @return The bytes for syncRev.
-     */
-    public com.google.protobuf.ByteString getSyncRevBytes() {
-      java.lang.Object ref = syncRev_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b =
-            com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
-        syncRev_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Git revision (tag or hash) to check out. Default HEAD.
-     * </pre>
-     *
-     * <code>string sync_rev = 5;</code>
-     *
-     * @param value The syncRev to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSyncRev(java.lang.String value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      syncRev_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Git revision (tag or hash) to check out. Default HEAD.
-     * </pre>
-     *
-     * <code>string sync_rev = 5;</code>
-     *
-     * @return This builder for chaining.
-     */
-    public Builder clearSyncRev() {
-      syncRev_ = getDefaultInstance().getSyncRev();
-      bitField0_ = (bitField0_ & ~0x00000010);
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * Git revision (tag or hash) to check out. Default HEAD.
-     * </pre>
-     *
-     * <code>string sync_rev = 5;</code>
-     *
-     * @param value The bytes for syncRev to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSyncRevBytes(com.google.protobuf.ByteString value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      checkByteStringIsUtf8(value);
-      syncRev_ = value;
-      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -1448,12 +1011,10 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Type of secret configured for access to the Git repo. Must be one of ssh,
-     * cookiefile, gcenode, token, gcpserviceaccount or none. The
-     * validation of this is case-sensitive. Required.
+     * Type of secret configured for access to the Git repo.
      * </pre>
      *
-     * <code>string secret_type = 6;</code>
+     * <code>string secret_type = 4;</code>
      *
      * @return The secretType.
      */
@@ -1472,12 +1033,10 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Type of secret configured for access to the Git repo. Must be one of ssh,
-     * cookiefile, gcenode, token, gcpserviceaccount or none. The
-     * validation of this is case-sensitive. Required.
+     * Type of secret configured for access to the Git repo.
      * </pre>
      *
-     * <code>string secret_type = 6;</code>
+     * <code>string secret_type = 4;</code>
      *
      * @return The bytes for secretType.
      */
@@ -1496,12 +1055,10 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Type of secret configured for access to the Git repo. Must be one of ssh,
-     * cookiefile, gcenode, token, gcpserviceaccount or none. The
-     * validation of this is case-sensitive. Required.
+     * Type of secret configured for access to the Git repo.
      * </pre>
      *
-     * <code>string secret_type = 6;</code>
+     * <code>string secret_type = 4;</code>
      *
      * @param value The secretType to set.
      * @return This builder for chaining.
@@ -1511,7 +1068,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
         throw new NullPointerException();
       }
       secretType_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1519,18 +1076,16 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Type of secret configured for access to the Git repo. Must be one of ssh,
-     * cookiefile, gcenode, token, gcpserviceaccount or none. The
-     * validation of this is case-sensitive. Required.
+     * Type of secret configured for access to the Git repo.
      * </pre>
      *
-     * <code>string secret_type = 6;</code>
+     * <code>string secret_type = 4;</code>
      *
      * @return This builder for chaining.
      */
     public Builder clearSecretType() {
       secretType_ = getDefaultInstance().getSecretType();
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
@@ -1538,12 +1093,10 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      *
      *
      * <pre>
-     * Type of secret configured for access to the Git repo. Must be one of ssh,
-     * cookiefile, gcenode, token, gcpserviceaccount or none. The
-     * validation of this is case-sensitive. Required.
+     * Type of secret configured for access to the Git repo.
      * </pre>
      *
-     * <code>string secret_type = 6;</code>
+     * <code>string secret_type = 4;</code>
      *
      * @param value The bytes for secretType to set.
      * @return This builder for chaining.
@@ -1554,113 +1107,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
       }
       checkByteStringIsUtf8(value);
       secretType_ = value;
-      bitField0_ |= 0x00000020;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object httpsProxy_ = "";
-    /**
-     *
-     *
-     * <pre>
-     * URL for the HTTPS proxy to be used when communicating with the Git repo.
-     * </pre>
-     *
-     * <code>string https_proxy = 7;</code>
-     *
-     * @return The httpsProxy.
-     */
-    public java.lang.String getHttpsProxy() {
-      java.lang.Object ref = httpsProxy_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        httpsProxy_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * URL for the HTTPS proxy to be used when communicating with the Git repo.
-     * </pre>
-     *
-     * <code>string https_proxy = 7;</code>
-     *
-     * @return The bytes for httpsProxy.
-     */
-    public com.google.protobuf.ByteString getHttpsProxyBytes() {
-      java.lang.Object ref = httpsProxy_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b =
-            com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
-        httpsProxy_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     *
-     *
-     * <pre>
-     * URL for the HTTPS proxy to be used when communicating with the Git repo.
-     * </pre>
-     *
-     * <code>string https_proxy = 7;</code>
-     *
-     * @param value The httpsProxy to set.
-     * @return This builder for chaining.
-     */
-    public Builder setHttpsProxy(java.lang.String value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      httpsProxy_ = value;
-      bitField0_ |= 0x00000040;
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * URL for the HTTPS proxy to be used when communicating with the Git repo.
-     * </pre>
-     *
-     * <code>string https_proxy = 7;</code>
-     *
-     * @return This builder for chaining.
-     */
-    public Builder clearHttpsProxy() {
-      httpsProxy_ = getDefaultInstance().getHttpsProxy();
-      bitField0_ = (bitField0_ & ~0x00000040);
-      onChanged();
-      return this;
-    }
-    /**
-     *
-     *
-     * <pre>
-     * URL for the HTTPS proxy to be used when communicating with the Git repo.
-     * </pre>
-     *
-     * <code>string https_proxy = 7;</code>
-     *
-     * @param value The bytes for httpsProxy to set.
-     * @return This builder for chaining.
-     */
-    public Builder setHttpsProxyBytes(com.google.protobuf.ByteString value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      checkByteStringIsUtf8(value);
-      httpsProxy_ = value;
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
@@ -1674,7 +1121,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * gcpServiceAccount.
      * </pre>
      *
-     * <code>string gcp_service_account_email = 8;</code>
+     * <code>string gcp_service_account_email = 5;</code>
      *
      * @return The gcpServiceAccountEmail.
      */
@@ -1697,7 +1144,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * gcpServiceAccount.
      * </pre>
      *
-     * <code>string gcp_service_account_email = 8;</code>
+     * <code>string gcp_service_account_email = 5;</code>
      *
      * @return The bytes for gcpServiceAccountEmail.
      */
@@ -1720,7 +1167,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * gcpServiceAccount.
      * </pre>
      *
-     * <code>string gcp_service_account_email = 8;</code>
+     * <code>string gcp_service_account_email = 5;</code>
      *
      * @param value The gcpServiceAccountEmail to set.
      * @return This builder for chaining.
@@ -1730,7 +1177,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
         throw new NullPointerException();
       }
       gcpServiceAccountEmail_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -1742,13 +1189,13 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * gcpServiceAccount.
      * </pre>
      *
-     * <code>string gcp_service_account_email = 8;</code>
+     * <code>string gcp_service_account_email = 5;</code>
      *
      * @return This builder for chaining.
      */
     public Builder clearGcpServiceAccountEmail() {
       gcpServiceAccountEmail_ = getDefaultInstance().getGcpServiceAccountEmail();
-      bitField0_ = (bitField0_ & ~0x00000080);
+      bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
@@ -1760,7 +1207,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
      * gcpServiceAccount.
      * </pre>
      *
-     * <code>string gcp_service_account_email = 8;</code>
+     * <code>string gcp_service_account_email = 5;</code>
      *
      * @param value The bytes for gcpServiceAccountEmail to set.
      * @return This builder for chaining.
@@ -1771,7 +1218,7 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
       }
       checkByteStringIsUtf8(value);
       gcpServiceAccountEmail_ = value;
-      bitField0_ |= 0x00000080;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
@@ -1787,24 +1234,24 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
       return super.mergeUnknownFields(unknownFields);
     }
 
-    // @@protoc_insertion_point(builder_scope:google.cloud.gkehub.configmanagement.v1.GitConfig)
+    // @@protoc_insertion_point(builder_scope:google.cloud.gkehub.configmanagement.v1.OciConfig)
   }
 
-  // @@protoc_insertion_point(class_scope:google.cloud.gkehub.configmanagement.v1.GitConfig)
-  private static final com.google.cloud.gkehub.configmanagement.v1.GitConfig DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:google.cloud.gkehub.configmanagement.v1.OciConfig)
+  private static final com.google.cloud.gkehub.configmanagement.v1.OciConfig DEFAULT_INSTANCE;
 
   static {
-    DEFAULT_INSTANCE = new com.google.cloud.gkehub.configmanagement.v1.GitConfig();
+    DEFAULT_INSTANCE = new com.google.cloud.gkehub.configmanagement.v1.OciConfig();
   }
 
-  public static com.google.cloud.gkehub.configmanagement.v1.GitConfig getDefaultInstance() {
+  public static com.google.cloud.gkehub.configmanagement.v1.OciConfig getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GitConfig> PARSER =
-      new com.google.protobuf.AbstractParser<GitConfig>() {
+  private static final com.google.protobuf.Parser<OciConfig> PARSER =
+      new com.google.protobuf.AbstractParser<OciConfig>() {
         @java.lang.Override
-        public GitConfig parsePartialFrom(
+        public OciConfig parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1823,17 +1270,17 @@ public final class GitConfig extends com.google.protobuf.GeneratedMessageV3
         }
       };
 
-  public static com.google.protobuf.Parser<GitConfig> parser() {
+  public static com.google.protobuf.Parser<OciConfig> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GitConfig> getParserForType() {
+  public com.google.protobuf.Parser<OciConfig> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.cloud.gkehub.configmanagement.v1.GitConfig getDefaultInstanceForType() {
+  public com.google.cloud.gkehub.configmanagement.v1.OciConfig getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 }
